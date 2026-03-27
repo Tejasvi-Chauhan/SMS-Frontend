@@ -6,7 +6,7 @@ const ProfileRequests = () => {
 
   const [requests, setRequests] = useState([]);
 
-  // 👉 fetch requests
+  //  fetch requests
   const fetchRequests = async () => {
     try {
       const res = await getAllRequests();
@@ -20,12 +20,12 @@ const ProfileRequests = () => {
     fetchRequests();
   }, []);
 
-  // 👉 approve
+  //  approve
   const handleApprove = async (id) => {
     try {
       await updateRequestStatus(id, {
         status: "Approved",
-        reviewedBy: 1 // simple for now
+        reviewedBy: 1 
       });
       fetchRequests();
     } catch (err) {
@@ -33,7 +33,7 @@ const ProfileRequests = () => {
     }
   };
 
-  // 👉 reject
+  //  reject
   const handleReject = async (id) => {
     try {
       await updateRequestStatus(id, {
@@ -46,7 +46,7 @@ const ProfileRequests = () => {
     }
   };
 
-  // 👉 delete
+  //  delete
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this request?")) return;
 
@@ -89,7 +89,6 @@ const ProfileRequests = () => {
                 <td>{r.status}</td>
 
                 <td>
-                  {/* 👉 only if pending */}
                   {r.status === "Pending" && (
                     <>
                       <button

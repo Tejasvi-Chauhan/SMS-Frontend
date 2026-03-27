@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { getAllRequests } from "../../api/profileService";
 import api from "../../api/axiosInstance";
+import { profileUpdate } from "../../api/studentService";
 
 const ProfileRequest = () => {
 
@@ -14,11 +15,12 @@ const ProfileRequest = () => {
     newValue: ""
   });
 
-  // 👉 fetch requests
+  //  fetch requests
   const fetchRequests = async () => {
     try {
       const res = await getAllRequests();
       const myName = user?.name;
+     
 
       // sirf apni requests
       const myData = res.data.filter(r => r.fullName === myName);
@@ -33,7 +35,7 @@ const ProfileRequest = () => {
     fetchRequests();
   }, []);
 
-  // 👉 change
+  //  change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -41,7 +43,7 @@ const ProfileRequest = () => {
     });
   };
 
-  // 👉 submit request
+  //  submit request
   const handleSubmit = async () => {
     if (!formData.fieldName || !formData.newValue) {
       alert("Fill required fields");
@@ -49,7 +51,12 @@ const ProfileRequest = () => {
     }
 
     try {
-      await api.post("/profile", formData);
+
+      const id=user.id
+    
+      await profileUpdate(id,formData)
+      
+      alert("Request is created");
 
       // reset
       setFormData({
@@ -61,6 +68,7 @@ const ProfileRequest = () => {
       fetchRequests();
 
     } catch (err) {
+      alert("Something went wrong");
       console.log(err);
     }
   };
@@ -70,7 +78,6 @@ const ProfileRequest = () => {
 
       <h2 className="text-2xl font-bold">Profile Requests</h2>
 
-      {/* ===== FORM ===== */}
       <div className="bg-white p-4 rounded shadow space-y-3">
 
         <select
@@ -81,9 +88,9 @@ const ProfileRequest = () => {
         >
           <option value="">Select Field</option>
           <option value="FullName">Full Name</option>
-          <option value="Email">Email</option>
-          <option value="PhoneNumber">Phone</option>
+          <option value="PhoneNumber">Phone No </option>
           <option value="Address">Address</option>
+          <option value="DOB">D.O.B</option>
         </select>
 
         <input
@@ -110,7 +117,6 @@ const ProfileRequest = () => {
         </button>
       </div>
 
-      {/* ===== TABLE ===== */}
       <div className="bg-white p-4 rounded shadow">
         <h3 className="font-bold mb-3">My Requests</h3>
 

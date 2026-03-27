@@ -29,11 +29,11 @@ const StudentTeacher = () => {
         getAllStudents(),
         getAllTeachers(),
       ]);
-
+      
       setAssignments(a.data);
       setStudents(s.data);
       setTeachers(t.data);
-
+     
     } catch (err) {
       console.log(err);
     }
@@ -88,11 +88,9 @@ const StudentTeacher = () => {
   return (
     <div className="p-6 space-y-6">
 
-      {/* ===== ASSIGN FORM ===== */}
       <div className="bg-white p-4 rounded shadow space-y-3">
         <h2 className="text-xl font-bold">Assign Teacher</h2>
 
-        {/* Student */}
         <select
           name="studentId"
           value={formData.studentId}
@@ -107,7 +105,6 @@ const StudentTeacher = () => {
           ))}
         </select>
 
-        {/* Teacher */}
         <select
           name="teacherId"
           value={formData.teacherId}
@@ -130,7 +127,6 @@ const StudentTeacher = () => {
         </button>
       </div>
 
-      {/* ===== TABLE ===== */}
       <div className="bg-white p-4 rounded shadow">
         <h2 className="text-xl font-bold mb-4">Student Teachers</h2>
 

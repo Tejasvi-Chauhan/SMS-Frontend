@@ -28,7 +28,7 @@ const EnterMarks = () => {
 
   const [editId, setEditId] = useState(null);
 
-  // 👉 fetch data
+  //  fetch data
   const fetchData = async () => {
     try {
       const name = user?.name;
@@ -52,7 +52,7 @@ const EnterMarks = () => {
     fetchData();
   }, []);
 
-  // 👉 change
+  //  change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -60,9 +60,10 @@ const EnterMarks = () => {
     });
   };
 
-  // 👉 add marks
+  //  add marks
   const handleAdd = async () => {
     try {
+      console.log(formData);
       await addMarks({
         studentId: parseInt(formData.studentId),
         courseId: parseInt(formData.courseId),
@@ -87,7 +88,7 @@ const EnterMarks = () => {
     }
   };
 
-  // 👉 start edit
+  //  start edit
   const handleEdit = (m) => {
     setEditId(m.id);
     setFormData({
@@ -97,7 +98,7 @@ const EnterMarks = () => {
     });
   };
 
-  // 👉 update
+  //  update
   const handleUpdate = async () => {
     try {
       await updateMarks(editId, {
@@ -120,20 +121,19 @@ const EnterMarks = () => {
 
       <h2 className="text-2xl font-bold">Enter Marks</h2>
 
-      {/* ===== ADD FORM ===== */}
       <div className="bg-white p-4 rounded shadow space-y-3">
 
         <select name="studentId" value={formData.studentId} onChange={handleChange} className="border p-2 w-full">
           <option value="">Select Student</option>
           {students.map(s => (
-            <option key={s.id} value={s.studentId}>{s.studentName}</option>
+            <option key={s.id} value={s.id}>{s.studentName}</option>
           ))}
         </select>
 
         <select name="courseId" value={formData.courseId} onChange={handleChange} className="border p-2 w-full">
           <option value="">Select Course</option>
           {courses.map(c => (
-            <option key={c.id} value={c.courseId}>{c.courseName}</option>
+            <option key={c.id} value={c.id}>{c.courseName}</option>
           ))}
         </select>
 
@@ -165,7 +165,6 @@ const EnterMarks = () => {
         </button>
       </div>
 
-      {/* ===== TABLE ===== */}
       <div className="bg-white p-4 rounded shadow">
 
         <table className="w-full border">

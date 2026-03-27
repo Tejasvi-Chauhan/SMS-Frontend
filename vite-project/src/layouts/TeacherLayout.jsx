@@ -31,10 +31,10 @@ const TeacherLayout = () => {
   return (
     <div className="flex h-screen overflow-hidden bg-slate-100">
 
-      {/* SIDEBAR */}
+    
       <aside className={`flex flex-col bg-emerald-900 text-white transition-all duration-300 flex-shrink-0 ${collapsed ? "w-16" : "w-56"}`}>
 
-        {/* Logo */}
+   
         <div className="flex items-center justify-between px-3 py-4 border-b border-emerald-800">
           {!collapsed && <span className="font-bold text-base whitespace-nowrap text-white">SMS Teacher</span>}
           <button
@@ -45,7 +45,7 @@ const TeacherLayout = () => {
           </button>
         </div>
 
-        {/* Nav Links */}
+   
         <nav className="flex flex-col gap-1 p-2 flex-1 overflow-y-auto">
           {navLinks.map((link) => (
             <NavLink
@@ -66,7 +66,6 @@ const TeacherLayout = () => {
           ))}
         </nav>
 
-        {/* Footer */}
         {!collapsed && (
           <div className="px-3 py-3 border-t border-emerald-800">
             <p className="text-xs text-emerald-400">Logged in as</p>
@@ -75,10 +74,8 @@ const TeacherLayout = () => {
         )}
       </aside>
 
-      {/* RIGHT SIDE */}
       <div className="flex flex-col flex-1 min-w-0">
 
-        {/* TOPBAR */}
         <header className="flex items-center justify-between bg-white border-b border-slate-200 px-6 py-3 flex-shrink-0 shadow-sm">
           <span className="text-base font-semibold text-slate-700">Teacher Panel</span>
           <div className="flex items-center gap-3">
@@ -97,7 +94,6 @@ const TeacherLayout = () => {
           </div>
         </header>
 
-        {/* CONTENT */}
         <main className="flex-1 overflow-y-auto p-6">
           <Outlet />
         </main>

@@ -14,7 +14,7 @@ const TeacherDashboard = () => {
   const [students, setStudents] = useState([]);
   const [marks, setMarks] = useState([]);
 
-  // 👉 fetch data
+  //  fetch data
   const fetchData = async () => {
     try {
       const name = user?.name;
@@ -44,7 +44,6 @@ const TeacherDashboard = () => {
 
       <h2 className="text-2xl font-bold">Welcome {user?.name}</h2>
 
-      {/* ===== STATS ===== */}
       <div className="flex gap-4">
 
         <div className="bg-blue-100 p-4 rounded">
@@ -64,7 +63,6 @@ const TeacherDashboard = () => {
 
       </div>
 
-      {/* ===== COURSES ===== */}
       <div>
         <h3 className="font-bold mb-2">My Courses</h3>
 
@@ -75,7 +73,6 @@ const TeacherDashboard = () => {
         ))}
       </div>
 
-      {/* ===== STUDENTS ===== */}
       <div>
         <h3 className="font-bold mb-2">My Students</h3>
 

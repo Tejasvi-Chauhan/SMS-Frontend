@@ -10,7 +10,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 
 const TeacherCourse = () => {
 
-  // 👉 lists
+  //  lists
   const [assignments, setAssignments] = useState([]);
   const [teachers, setTeachers] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -73,7 +73,7 @@ const TeacherCourse = () => {
     }
   };
 
-  // 👉 delete
+  //  delete
   const handleDelete = async (id) => {
     if (!window.confirm("Remove this course from teacher?")) return;
 
@@ -88,11 +88,10 @@ const TeacherCourse = () => {
   return (
     <div className="p-6 space-y-6">
 
-      {/* ===== ASSIGN FORM ===== */}
+     
       <div className="bg-white p-4 rounded shadow space-y-3">
         <h2 className="text-xl font-bold">Assign Course</h2>
 
-        {/* Teacher */}
         <select
           name="teacherId"
           value={formData.teacherId}
@@ -107,7 +106,6 @@ const TeacherCourse = () => {
           ))}
         </select>
 
-        {/* Course */}
         <select
           name="courseId"
           value={formData.courseId}
@@ -130,7 +128,6 @@ const TeacherCourse = () => {
         </button>
       </div>
 
-      {/* ===== TABLE ===== */}
       <div className="bg-white p-4 rounded shadow">
         <h2 className="text-xl font-bold mb-4">Teacher Courses</h2>
 

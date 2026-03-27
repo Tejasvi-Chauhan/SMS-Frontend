@@ -11,7 +11,7 @@ const StudentDashboard = () => {
   const [teachers, setTeachers] = useState([]);
   const [marks, setMarks] = useState([]);
 
-  // 👉 fetch data
+  //  fetch data
   const fetchData = async () => {
     try {
       const name = user?.name;
@@ -36,7 +36,7 @@ const StudentDashboard = () => {
     fetchData();
   }, []);
 
-  // 👉 average marks
+  //  average marks
   const avg =
     marks.length > 0
       ? (marks.reduce((a, b) => a + b.marksObtained, 0) / marks.length).toFixed(1)
@@ -47,7 +47,7 @@ const StudentDashboard = () => {
 
       <h2 className="text-2xl font-bold">Welcome {user?.name}</h2>
 
-      {/* ===== STATS ===== */}
+    
       <div className="flex gap-4">
 
         <div className="bg-blue-100 p-4 rounded">
@@ -72,7 +72,6 @@ const StudentDashboard = () => {
 
       </div>
 
-      {/* ===== COURSES ===== */}
       <div>
         <h3 className="font-bold mb-2">My Courses</h3>
 
@@ -83,7 +82,7 @@ const StudentDashboard = () => {
         ))}
       </div>
 
-      {/* ===== TEACHERS ===== */}
+     
       <div>
         <h3 className="font-bold mb-2">My Teachers</h3>
 
@@ -94,7 +93,7 @@ const StudentDashboard = () => {
         ))}
       </div>
 
-      {/* ===== MARKS ===== */}
+   
       <div>
         <h3 className="font-bold mb-2">My Marks</h3>
 

@@ -60,7 +60,6 @@ const AdminLayout = () => {
           <button
             onClick={() => setCollapsed(!collapsed)}
             className="text-slate-400 hover:text-white hover:bg-slate-700 p-1.5 rounded transition-colors ml-auto"
-            // ml-auto → collapsed mein button right side pe rahega
             title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             
@@ -120,19 +119,12 @@ const AdminLayout = () => {
         <header className="flex items-center justify-between bg-white border-b border-slate-200 px-6 h-15 py-3 flex-shrink-0 shadow-sm">
           <div className="flex items-center gap-2">
             <span className="text-base font-semibold text-slate-700">
-              Admin Panel
+             
             </span>
           </div>
 
           <div className="flex items-center gap-3">
 
-            <span className="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
-              {user?.role || "Admin"}
-            </span>
-
-            <span className="text-sm font-medium text-slate-600">
-              {user?.name || "Admin"}
-            </span>
 
             <div className="w-px h-5 bg-slate-200" />
 

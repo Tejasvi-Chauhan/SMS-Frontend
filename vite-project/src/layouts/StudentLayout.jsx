@@ -15,6 +15,7 @@ const navLinks = [
   { path: "/student/dashboard",        label: "Dashboard",       icon: <RiDashboardLine /> },
   { path: "/student/marks",            label: "My Marks",        icon: <RiMedalLine />     },
   { path: "/student/profile-request",  label: "Profile Request", icon: <RiFileListLine />  },
+  { path: "/teacher/profile",   label: "My Profile",  icon: <RiUserLine />     },
 ];
 
 
@@ -31,10 +32,8 @@ const StudentLayout = () => {
   return (
     <div className="flex h-screen overflow-hidden bg-slate-100">
 
-      {/* SIDEBAR */}
       <aside className={`flex flex-col bg-violet-900 text-white transition-all duration-300 flex-shrink-0 ${collapsed ? "w-16" : "w-56"}`}>
 
-        {/* Logo */}
         <div className="flex items-center justify-between px-3 py-4 border-b border-violet-800">
           {!collapsed && (
             <span className="font-bold text-base whitespace-nowrap text-white">
@@ -52,7 +51,6 @@ const StudentLayout = () => {
           </button>
         </div>
 
-        {/* Nav Links */}
         <nav className="flex flex-col gap-1 p-2 flex-1 overflow-y-auto">
           {navLinks.map((link) => (
             <NavLink
@@ -76,7 +74,6 @@ const StudentLayout = () => {
           ))}
         </nav>
 
-        {/* Footer */}
         {!collapsed && (
           <div className="px-3 py-3 border-t border-violet-800">
             <p className="text-xs text-violet-400">Logged in as</p>
@@ -87,10 +84,8 @@ const StudentLayout = () => {
         )}
       </aside>
 
-      {/* RIGHT SIDE */}
       <div className="flex flex-col flex-1 min-w-0">
 
-        {/* TOPBAR */}
         <header className="flex items-center justify-between bg-white border-b border-slate-200 px-6 py-3 flex-shrink-0 shadow-sm">
           <span className="text-base font-semibold text-slate-700">
             Student Panel
@@ -113,7 +108,6 @@ const StudentLayout = () => {
           </div>
         </header>
 
-        {/* CONTENT */}
         <main className="flex-1 overflow-y-auto p-6">
           <Outlet />
         </main>

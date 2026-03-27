@@ -10,18 +10,18 @@ import { RiDeleteBinLine } from "react-icons/ri";
 
 const StudentCourse = () => {
 
-  // 👉 lists
+  // lists
   const [assignments, setAssignments] = useState([]);
   const [students, setStudents] = useState([]);
   const [courses, setCourses] = useState([]);
 
-  // 👉 form state
+  //  form state
   const [formData, setFormData] = useState({
     studentId: "",
     courseId: "",
   });
 
-  // 👉 fetch data
+  //  fetch data
   const fetchData = async () => {
     try {
       const [a, s, c] = await Promise.all([
@@ -29,7 +29,7 @@ const StudentCourse = () => {
         getAllStudents(),
         getAllCourses(),
       ]);
-
+      
       setAssignments(a.data);
       setStudents(s.data);
       setCourses(c.data);
@@ -43,7 +43,7 @@ const StudentCourse = () => {
     fetchData();
   }, []);
 
-  // 👉 handle change
+  //  handle change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -51,7 +51,7 @@ const StudentCourse = () => {
     });
   };
 
-  // 👉 assign course
+  //  assign course
   const handleAssign = async () => {
     if (!formData.studentId || !formData.courseId) {
       alert("Select student and course");
@@ -73,11 +73,12 @@ const StudentCourse = () => {
     }
   };
 
-  // 👉 delete assignment
+  //  delete assignment
   const handleDelete = async (id) => {
     if (!window.confirm("Remove this course from student?")) return;
-
+    console.log(id);
     try {
+      console.log(id);
       await removeStudentCourse(id);
       fetchData();
     } catch (err) {
@@ -88,11 +89,11 @@ const StudentCourse = () => {
   return (
     <div className="p-6 space-y-6">
 
-      {/* ===== ASSIGN FORM ===== */}
+      
       <div className="bg-white p-4 rounded shadow space-y-3">
         <h2 className="text-xl font-bold">Assign Course</h2>
 
-        {/* Student */}
+       
         <select
           name="studentId"
           value={formData.studentId}
@@ -107,7 +108,7 @@ const StudentCourse = () => {
           ))}
         </select>
 
-        {/* Course */}
+     
         <select
           name="courseId"
           value={formData.courseId}
@@ -130,7 +131,7 @@ const StudentCourse = () => {
         </button>
       </div>
 
-      {/* ===== TABLE ===== */}
+     
       <div className="bg-white p-4 rounded shadow">
         <h2 className="text-xl font-bold mb-4">Assignments</h2>
 
@@ -146,11 +147,14 @@ const StudentCourse = () => {
           <tbody>
             {assignments.map((a) => (
               <tr key={a.id} className="text-center border-t">
+              
                 <td>{a.studentName}</td>
                 <td>{a.courseName}</td>
                 <td>
+                   
                   <button
-                    onClick={() => handleDelete(a.id)}
+                    onClick={() => handleDelete(a.id) }
+                  
                     className="text-red-500"
                   >
                     <RiDeleteBinLine />

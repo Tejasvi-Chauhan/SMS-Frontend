@@ -8,7 +8,7 @@ const MyMarks = () => {
 
   const [marks, setMarks] = useState([]);
 
-  // 👉 fetch marks
+  //  fetch marks
   const fetchMarks = async () => {
     try {
       const res = await getAllMarks();
@@ -29,7 +29,7 @@ const MyMarks = () => {
     fetchMarks();
   }, []);
 
-  // 👉 average
+  //  average
   const avg =
     marks.length > 0
       ? (marks.reduce((a, b) => a + b.marksObtained, 0) / marks.length).toFixed(1)
@@ -43,7 +43,7 @@ const MyMarks = () => {
       <p>Total Subjects: {marks.length}</p>
       <p>Average Marks: {avg}</p>
 
-      {/* ===== TABLE ===== */}
+      
       <div className="bg-white p-4 rounded shadow">
 
         <table className="w-full border">

@@ -32,14 +32,12 @@ const LoginPage = () => {
       const { token } = response.data;
 
       const payload = JSON.parse(atob(token.split(".")[1]));
+      console.log(payload);
 
       const userData = {
-        name:
-          payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] ||
-          "",
-        role:
-          payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] ||
-          "",
+        name: payload.name,
+        role: payload.role,
+        id: payload.id,
       };
 
       login(token, userData);
@@ -49,46 +47,39 @@ const LoginPage = () => {
       else if (userData.role === "Student") navigate("/student/dashboard");
       else setError("Invalid role. Please contact admin.");
     } catch (err) {
-  if (err.response?.status === 400 && err.response.data?.errors) {
-    const errors = err.response.data.errors;
+      if (err.response?.status === 400 && err.response.data?.errors) {
+        const errors = err.response.data.errors;
 
-    // Password validation
-    if (errors.Password) {
-      setError(errors.Password[0]);
+        // Password validation
+        if (errors.Password) {
+          setError(errors.Password[0]);
+        }
+        // Email validation
+        else if (errors.Email) {
+          setError(errors.Email[0]);
+        } else {
+          setError("Validation error");
+        }
+      } else if (err.response?.status === 401) {
+        setError("Invalid email or password.");
+      } else if (typeof err.response?.data === "string") {
+        setError(err.response.data);
+      } else {
+        setError("Server is not connected.");
+      }
+    } finally {
+      setLoading(false);
     }
-    // Email validation
-    else if (errors.Email) {
-      setError(errors.Email[0]);
-    }
-    else {
-      setError("Validation error");
-    }
-
-  } else if (err.response?.status === 401) {
-    setError("Invalid email or password.");
-  }   else if (typeof err.response?.data === "string") {
-    setError(err.response.data);
-  
-  } else {
-    setError("Server is not connected.");
-  }
-} finally {
-  setLoading(false);
-}
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
-        
         <h2 className="text-2xl font-bold text-center text-gray-800">
           Student Management System
         </h2>
 
-        <p className="text-center text-gray-500 mt-2 mb-6">
-         
-        </p>
+        <p className="text-center text-gray-500 mt-2 mb-6"></p>
 
         {error && (
           <div className="bg-red-100 text-red-600 p-2 rounded mb-4 text-sm text-center">
@@ -97,8 +88,6 @@ const LoginPage = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          
-          {/* Username */}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">
               E-Mail
@@ -114,7 +103,6 @@ const LoginPage = () => {
             />
           </div>
 
-          {/* Password */}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">
               Password
@@ -130,7 +118,6 @@ const LoginPage = () => {
             />
           </div>
 
-          {/* Button */}
           <button
             type="submit"
             disabled={loading}
@@ -142,7 +129,6 @@ const LoginPage = () => {
           >
             {loading ? "Logging in..." : "Login"}
           </button>
-
         </form>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "../../api/axiosInstance";
 import { RiDeleteBinLine } from "react-icons/ri";
+import api from "../../api/axiosInstance";
 
 const Students = () => {
 
@@ -12,7 +12,7 @@ const Students = () => {
     fullName: "",
     email: "",
     password: "",
-    rollNumber: "",
+    rollNumber:"",
     address: "",
     phoneNumber: "",
     dateOfBirth: ""
@@ -21,7 +21,7 @@ const Students = () => {
   //  Fetch students
   const fetchStudents = async () => {
     try {
-      const res = await axios.get("/student");
+      const res = await api.get("/student");
       setStudents(res.data);
     } catch (err) {
       console.log(err);
@@ -41,17 +41,17 @@ const Students = () => {
   };
 
   //  Add student
-  const handleSubmit = async () => {
-    
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      await axios.post("/student", formData);
+      await api.post("/student", formData);
 
       // reset form
       setFormData({
         fullName: "",
         email: "",
         password: "",
-        rollNumber: "",
+        rollNumber:"",
         address: "",
         phoneNumber: "",
         dateOfBirth: ""
@@ -60,7 +60,7 @@ const Students = () => {
       fetchStudents();
     } catch (err) {
       console.log(err);
-      alert("Error adding student");
+      alert("Spmeting went wrong");
     }
   };
 
@@ -69,7 +69,7 @@ const Students = () => {
     if (!window.confirm("Delete this student?")) return;
 
     try {
-      await axios.delete(`/student/${id}`);
+      await api.delete(`/student/${id}`);
       fetchStudents();
     } catch (err) {
       console.log(err);
@@ -88,8 +88,7 @@ const Students = () => {
         <input name="email" value={formData.email} onChange={handleChange} placeholder="Email" className="border p-2 w-full" />
 
         <input name="password" value={formData.password} onChange={handleChange} placeholder="Password" className="border p-2 w-full" />
-
-        <input name="rollNumber" value={formData.rollNumber} onChange={handleChange} placeholder="Roll Number" className="border p-2 w-full" />
+        <input name="rollNumber" value={formData.rollNumber} onChange={handleChange} placeholder="RollNumber" className="border p-2 w-full" />
 
         <input name="address" value={formData.address} onChange={handleChange} placeholder="Address" className="border p-2 w-full" />
 
@@ -103,7 +102,6 @@ const Students = () => {
 
 </form>
 
-      {/* ===== STUDENT TABLE ===== */}
       <div className="bg-white p-4 rounded shadow">
         <h2 className="text-xl font-bold mb-4">Students List</h2>
 

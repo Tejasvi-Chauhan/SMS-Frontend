@@ -4,7 +4,7 @@ import { RiAddLine, RiDeleteBinLine } from "react-icons/ri";
 
 const Teachers = () => {
 
-  // 👉 simple states
+  //  simple states
   const [teachers, setTeachers] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ const Teachers = () => {
   const [phone, setPhone] = useState("");
   const [qualification, setQualification] = useState("");
 
-  // 👉 fetch teachers
+  //  fetch teachers
   const fetchTeachers = async () => {
     try {
       const res = await getAllTeachers();
@@ -27,7 +27,7 @@ const Teachers = () => {
     fetchTeachers();
   }, []);
 
-  // 👉 add teacher
+  //  add teacher
   const handleAddTeacher = async () => {
     if (!name || !email || !password || !phone || !qualification) {
       alert("Please fill all required fields");
@@ -58,7 +58,7 @@ const Teachers = () => {
     }
   };
 
-  // 👉 delete teacher
+  //  delete teacher
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this teacher?")) return;
 
@@ -73,8 +73,10 @@ const Teachers = () => {
   return (
     <div className="p-6">
 
-      {/* ===== ADD FORM ===== */}
-      <div className="bg-white p-4 rounded shadow mb-6 space-y-3">
+      <form onSubmit={(e)=>{
+        e.preventDefault();
+        handleAddTeacher();
+      }} className="bg-white p-4 rounded shadow mb-6 space-y-3">
         <h2 className="text-xl font-bold">Add Teacher</h2>
 
         <input
@@ -126,15 +128,14 @@ const Teachers = () => {
         />
 
         <button
-          onClick={handleAddTeacher}
+          type="submit"
           className="bg-green-500 text-white px-4 py-2 flex items-center gap-2"
         >
           <RiAddLine />
           Add Teacher
         </button>
-      </div>
+      </form>
 
-      {/* ===== TABLE ===== */}
       <div className="bg-white p-4 rounded shadow">
         <h2 className="text-xl font-bold mb-4">Teachers List</h2>
 

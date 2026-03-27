@@ -8,14 +8,13 @@ import { RiDeleteBinLine } from "react-icons/ri";
 
 const Courses = () => {
 
-  // 👉 course list
   const [courses, setCourses] = useState([]);
 
-  // 👉 form state
+  //form state
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
 
-  // 👉 fetch courses
+  // fetch courses
   const fetchCourses = async () => {
     try {
       const res = await getAllCourses();
@@ -29,7 +28,7 @@ const Courses = () => {
     fetchCourses();
   }, []);
 
-  // 👉 add course
+  //  add course
   const handleAddCourse = async () => {
     if (!courseName || !courseCode) {
       alert("Please fill all fields");
@@ -52,7 +51,7 @@ const Courses = () => {
     }
   };
 
-  // 👉 delete course
+  //  delete course
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this course?")) return;
 
@@ -67,8 +66,10 @@ const Courses = () => {
   return (
     <div className="p-6 space-y-6">
 
-      {/* ===== ADD FORM ===== */}
-      <div className="bg-white p-4 rounded shadow space-y-3">
+      <form onSubmit={(e)=>{
+          e.preventDefault();
+          handleAddCourse();
+      }} className="bg-white p-4 rounded shadow space-y-3">
         <h2 className="text-xl font-bold">Add Course</h2>
 
         <input
@@ -88,14 +89,13 @@ const Courses = () => {
         />
 
         <button
-          onClick={handleAddCourse}
+          type="Submit"
           className="bg-purple-500 text-white px-4 py-2 rounded"
         >
           Add Course
         </button>
-      </div>
+      </form>
 
-      {/* ===== COURSE TABLE ===== */}
       <div className="bg-white p-4 rounded shadow">
         <h2 className="text-xl font-bold mb-4">Courses List</h2>
 
@@ -111,11 +111,12 @@ const Courses = () => {
           <tbody>
             {courses.map((c) => (
               <tr key={c.id} className="text-center border-t">
+                {console.log(c)}
                 <td className="p-2">{c.courseName}</td>
                 <td>{c.courseCode}</td>
                 <td>
                   <button
-                    onClick={() => handleDelete(c.id)}
+                    onClick={() =>   handleDelete(c.id)}
                     className="text-red-500"
                   >
                     <RiDeleteBinLine />
