@@ -79,10 +79,7 @@ const TeacherLayout = () => {
         <header className="flex items-center justify-between bg-white border-b border-slate-200 px-6 py-3 flex-shrink-0 shadow-sm">
           <span className="text-base font-semibold text-slate-700">Teacher Panel</span>
           <div className="flex items-center gap-3">
-            <span className="bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full">
-              {user?.role}
-            </span>
-            <span className="text-sm font-medium text-slate-600">{user?.name}</span>
+           
             <div className="w-px h-5 bg-slate-200" />
             <button
               onClick={handleLogout}

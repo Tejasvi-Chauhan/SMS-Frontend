@@ -175,36 +175,8 @@ const Dashboard = () => {
             ))}
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-200 p-5">
-        <h2 className="text-base font-semibold text-slate-700 mb-4">
-          Quick Actions
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {quickLinks.map((item) => (
-            <Link
-              key={item.path}
-               to={item.path}
-              className="flex items-center justify-between bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-800 text-sm font-medium py-2.5 px-3 rounded-lg transition-colors duration-150 no-underline"
-            >
-              <span>{item.label}</span>
-              <RiArrowRightLine className="text-slate-400 text-base" />
-            </Link>
-          ))}
-        </div>
-      </div>
+      
 
-      <div className="flex justify-end">
-        <button
-          onClick={fetchStats}
-          disabled={loading}
-          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-150"
-        >
-          <RiRefreshLine
-            className={`text-base ${loading ? "animate-spin" : ""}`}
-          />
-          {loading ? "Loading..." : "Refresh Stats"}
-        </button>
-      </div>
     </div>
   );
 };

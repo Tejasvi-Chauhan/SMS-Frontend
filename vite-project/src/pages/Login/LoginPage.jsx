@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { loginApi } from "../../api/authService";
+import ForgotPassword from "./ForgotPass";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     Email: "",
     password: "",
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -38,6 +39,7 @@ const LoginPage = () => {
         name: payload.name,
         role: payload.role,
         id: payload.id,
+        email: payload.email,
       };
 
       login(token, userData);
@@ -108,7 +110,7 @@ const LoginPage = () => {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password}
               onChange={handleChange}
@@ -116,6 +118,21 @@ const LoginPage = () => {
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
+            <div className="flex justify-between mt-1">
+              <span
+                className="text-sm text-blue-600 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Hide Password" : "Show Password"}
+              </span>
+
+              <span
+                className="text-sm text-blue-600 cursor-pointer"
+                onClick={() => navigate("/forgot-password")}
+              >
+                Forgot Password?
+              </span>
+            </div>
           </div>
 
           <button

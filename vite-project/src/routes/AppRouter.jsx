@@ -21,6 +21,9 @@ import ProfileRequest from "../pages/Student/ProfileRequest";
 import AdminLayout from "../layouts/AdminLayout";
 import TeacherLayout from "../layouts/TeacherLayout";
 import StudentLayout from "../layouts/StudentLayout";
+import ForgotPassword from "../pages/Login/ForgotPass";
+import ResetPassword from "../pages/Login/ResetPassword";
+import MyProfile from "../pages/Student/MyProfile";
 
 const RootRedirect = () => {
   const { user } = useAuth();
@@ -38,6 +41,9 @@ const AppRouter = () => {
     <Routes>
       <Route path="/" element={<RootRedirect />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+       
       <Route
         path="/unauthorized"
         element={
@@ -67,6 +73,7 @@ const AppRouter = () => {
         <Route element={<TeacherLayout />}>
           <Route path="/teacher/dashboard" element={<TeacherDashboard />} />
           <Route path="/teacher/marks" element={<EnterMarks />} />
+          
         </Route>
       </Route>
 
@@ -75,6 +82,7 @@ const AppRouter = () => {
           <Route path="/student/dashboard" element={<StudentDashboard />} />
           <Route path="/student/marks" element={<MyMarks />} />
           <Route path="/student/profile-request" element={<ProfileRequest />} />
+          <Route path="/student/profile" element={<MyProfile />} />
         </Route>
       </Route>
 

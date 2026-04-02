@@ -3,7 +3,6 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import api from "../../api/axiosInstance";
 
 const Students = () => {
-
   //  Students list
   const [students, setStudents] = useState([]);
 
@@ -12,10 +11,10 @@ const Students = () => {
     fullName: "",
     email: "",
     password: "",
-    rollNumber:"",
+    branch: "",
     address: "",
     phoneNumber: "",
-    dateOfBirth: ""
+    dateOfBirth: "",
   });
 
   //  Fetch students
@@ -36,13 +35,15 @@ const Students = () => {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   //  Add student
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(formData);
     try {
       await api.post("/student", formData);
 
@@ -51,16 +52,16 @@ const Students = () => {
         fullName: "",
         email: "",
         password: "",
-        rollNumber:"",
+        branch: "",
         address: "",
         phoneNumber: "",
-        dateOfBirth: ""
+        dateOfBirth: "",
       });
 
       fetchStudents();
     } catch (err) {
       console.log(err);
-      alert("Spmeting went wrong");
+      alert("Something went wrong");
     }
   };
 
@@ -78,29 +79,73 @@ const Students = () => {
 
   return (
     <div className="p-6 space-y-6">
-
-      
-    <form onSubmit={handleSubmit} className="bg-white p-4 rounded shadow space-y-3">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-4 rounded shadow space-y-3"
+      >
         <h2 className="text-xl font-bold">Add Student</h2>
 
-        <input name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full Name" className="border p-2 w-full" />
+        <input
+          name="fullName"
+          value={formData.fullName}
+          onChange={handleChange}
+          placeholder="Full Name"
+          className="border p-2 w-full"
+        />
 
-        <input name="email" value={formData.email} onChange={handleChange} placeholder="Email" className="border p-2 w-full" />
+        <input
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+          className="border p-2 w-full"
+        />
 
-        <input name="password" value={formData.password} onChange={handleChange} placeholder="Password" className="border p-2 w-full" />
-        <input name="rollNumber" value={formData.rollNumber} onChange={handleChange} placeholder="RollNumber" className="border p-2 w-full" />
+        <input
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Password"
+          className="border p-2 w-full"
+        />
+        <select name="branch" value={formData.branch} onChange={handleChange} className ="border p-2 w-full">
+          <option value="">Select Branch</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="Information Technology">Information Technology</option>
+          <option value="Mechanical Engineering">Mechanical</option>
+        </select>
 
-        <input name="address" value={formData.address} onChange={handleChange} placeholder="Address" className="border p-2 w-full" />
+        <input
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          placeholder="Address"
+          className="border p-2 w-full"
+        />
 
-        <input name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Phone Number" className="border p-2 w-full" />
+        <input
+          name="phoneNumber"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          placeholder="Phone Number"
+          className="border p-2 w-full"
+        />
 
-        <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} className="border p-2 w-full" />
+        <input
+          type="date"
+          name="dateOfBirth"
+          value={formData.dateOfBirth}
+          onChange={handleChange}
+          className="border p-2 w-full"
+        />
 
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-    Add Student
-  </button>
-
-</form>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Add Student
+        </button>
+      </form>
 
       <div className="bg-white p-4 rounded shadow">
         <h2 className="text-xl font-bold mb-4">Students List</h2>
@@ -109,6 +154,7 @@ const Students = () => {
           <thead>
             <tr className="bg-gray-100">
               <th className="p-2">Name</th>
+              <th>Branch</th>
               <th>Email</th>
               <th>Roll No</th>
               <th>Action</th>
@@ -119,9 +165,11 @@ const Students = () => {
             {students.map((s) => (
               <tr key={s.id} className="text-center border-t">
                 <td className="p-2">{s.fullName}</td>
+                <td>{s.branch}</td>
                 <td>{s.email}</td>
                 <td>{s.rollNumber}</td>
                 <td>
+                  {console.log(s)}
                   <button
                     onClick={() => handleDelete(s.id)}
                     className="text-red-500"
@@ -134,7 +182,6 @@ const Students = () => {
           </tbody>
         </table>
       </div>
-
     </div>
   );
 };

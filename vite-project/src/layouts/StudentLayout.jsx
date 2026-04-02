@@ -8,6 +8,7 @@ import {
   RiMenuFoldLine,
   RiMenuUnfoldLine,
   RiLogoutBoxLine,
+  RiUserLine,
 } from "react-icons/ri";
 
 
@@ -15,7 +16,7 @@ const navLinks = [
   { path: "/student/dashboard",        label: "Dashboard",       icon: <RiDashboardLine /> },
   { path: "/student/marks",            label: "My Marks",        icon: <RiMedalLine />     },
   { path: "/student/profile-request",  label: "Profile Request", icon: <RiFileListLine />  },
-  { path: "/teacher/profile",   label: "My Profile",  icon: <RiUserLine />     },
+  { path: "/student/profile",   label: "My Profile",  icon: <RiUserLine />     },
 ];
 
 
@@ -91,12 +92,7 @@ const StudentLayout = () => {
             Student Panel
           </span>
           <div className="flex items-center gap-3">
-            <span className="bg-violet-100 text-violet-700 text-xs font-semibold px-3 py-1 rounded-full">
-              {user?.role}
-            </span>
-            <span className="text-sm font-medium text-slate-600">
-              {user?.name}
-            </span>
+          
             <div className="w-px h-5 bg-slate-200" />
             <button
               onClick={handleLogout}
